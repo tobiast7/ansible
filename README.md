@@ -22,6 +22,15 @@ On Debian/Ubuntu/Kali Linux, you can probably do
     $ sudo apt install qemu-system-common vagrant
     $ sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virtinst virt-manager
 
+In order to properly install `vagrant`, at least on Ubuntu and Debian, you might need to add
+an extra `.deb` repository as described on the HashiCorp Vagrant pages:
+
+* https://developer.hashicorp.com/vagrant/install#linux
+
+It should be enough to copy and paste the instructions there, and then run
+
+    $ sudo apt install vagrant
+
 ### Fedora/Red Hat/CentOS/Rocky Linux
 
 On Fedora/Red Hat, you can probably do
