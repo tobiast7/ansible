@@ -58,3 +58,8 @@ Details of the output may differ between distributions, but the important thing 
 
 This should give you two VM:s; 'webserver' and 'dbserver' which are now ready to be used as lab environment.
 
+## Links and Resources for learning Ansible
+
+* [Ansible Community Documentation](https://docs.ansible.com/)
+* [Learning Ansible Basics](https://www.redhat.com/en/topics/automation/learning-ansible-tutorial) (RedHat)
+* [The Ansible Playbook](https://www.youtube.com/@AnsibleAutomation) (YouTube)
