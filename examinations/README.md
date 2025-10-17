@@ -53,7 +53,7 @@ When you start working you can fetch any changes made in the `upstream` repo by 
 If you have made any changes in any of the files from upstream, you may need to `merge` the
 changes by doing
 
-    $ git merge upstream main
+    $ git merge upstream/main
 
 If you get a merge conflict, refer to the git manual for how to resolve conflicts, or ask me
 for help in class.
