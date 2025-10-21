@@ -15,18 +15,22 @@ Look at the contents of the `~/.ssh` directory:
 ## QUESTION A
 
 What are the permissions of the `~/.ssh` directory?
+drwx----. Endast "Deploy" har read,write och execute behörigheter.
 
 Why are the permissions set in such a way?
+Den innehåller privata nycklar och authorized_keys så att den skyddas från obehörig access.
+
 
 ## QUESTION B
 
 What does the file `~/.ssh/authorized_keys` contain?
+Den innehåller public ssh keys för att kunna authenticate användaren utan lösenord.
 
 ## QUESTION C
 
 When logged into one of the VMs, how can you connect to the
 other VM without a password?
-
+Genera ett key pair och ta den publica nyckeln som skapades från servern och lägg in i authorized_keys i den andra server.
 ### Hints:
 
 * man ssh-keygen(1)
@@ -35,3 +39,6 @@ other VM without a password?
 ## BONUS QUESTION
 
 Can you run a command on a remote host via SSH? How?
+
+Ja, om du kör kommandot "ssh deploy@ipadressen "kommandot"
+där "kommandot" utförs på remote host och visas i lokala terminalen.
