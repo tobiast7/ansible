@@ -79,7 +79,11 @@ a number of keys and values that come from the output of the Ansible module.
 
 What does the output look like the first time you run this playbook?
 
+Första gången jag körde det så fick jag ut infon som ändrades i liknande json format i gul text där det stod ok=2 Changed=1 där changed visar att ändringar har gjorts.
+
 What does the output look like the second time you run this playbook?
+
+När jag körde samma igen så vart det samma json liknande text fast i grön text och så stod det ok=2 changed=0 vilket visar att inga ändringar gjordes då det redan var gjort.
 
 # QUESTION B
 
@@ -123,6 +127,8 @@ a self signed certificate.
 
 What is the disadvantage of having a task that _always_ makes sure a service is restarted, even if there is
 no configuration change?
+
+onödigt avbrott om tjänsten startas om fast inget ändrats, gör webbsidan otillgänglig en kort stund och skapar onödig belastning för servern.
 
 # BONUS QUESTION
 

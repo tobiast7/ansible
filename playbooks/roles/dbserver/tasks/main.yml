@@ -1,0 +1,22 @@
+---
+# tasks file for roles/dbserver
+    - name: Install Mariadb
+      ansible.builtin.package:
+        name: mariadb-server
+        state: present
+
+    - name: Ensure Mariadb is running
+      ansible.builtin.service:
+        name: mariadb
+        state: started
+        enabled: true
+
+    - name: Copy all .md files to deploys home directory
+      ansible.builtin.copy:
+        src: "{{ item }}"
+        dest: /home/deploy/
+        owner: deploy
+        group: deploy
+        mode: '0644'
+      with_fileglob:
+        - "files/*.md"

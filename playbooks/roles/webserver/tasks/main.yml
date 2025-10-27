@@ -1,0 +1,64 @@
+---
+# tasks file for roles/webserver
+    - name: install nginx
+      ansible.builtin.package:
+        name: nginx
+        state: latest
+
+    - name: Copy HTTPS configuration to nginx
+      ansible.builtin.copy:
+        src: https.conf
+        dest: /etc/nginx/conf.d/https.conf
+        owner: root
+        group: root
+        mode: '0644'
+      register: resultconf
+
+    - name: deploy nginx Config
+      ansible.builtin.template:
+        src: example.internal.conf.j2
+        dest: /etc/nginx/conf.d/example.internal.conf
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: create web root
+      ansible.builtin.file:
+        path: /var/www/example.internal/html
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+    
+    - name: Upload index.html
+      ansible.builtin.copy:
+        src: index.html
+        dest: /var/www/example.internal/html/index.html
+        owner: root
+        group: root
+        mode: '0644'
+      register: resultindex
+
+    - name: Ensure nginx is restarted
+      ansible.builtin.service:
+        name: nginx
+        state: restarted
+      when: resultconf.changed or resultindex.changed
+
+    - name: Add web users
+      vars:
+        web_users:
+        - name: alovelace
+          groups: ['wheel', 'audio', 'video']
+        - name: aturing
+          groups: ['tape']
+        - name: edijkstra
+          groups: ['tcpdump']
+        - name: ghopper
+          groups: ['wheel', 'audio']
+      ansible.builtin.user:
+        name: "{{ item.name }}"
+        groups: "{{ item.groups | join(',') }}"
+        append: true
+        state: present
+      loop: "{{ web_users }}"

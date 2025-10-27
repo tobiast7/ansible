@@ -1,0 +1,16 @@
+---
+    - name: Install a webserver
+      hosts: web
+      become: true
+      tasks:
+        - name: stop and disable nginx
+          ansible.builtin.service:
+            name: nginx
+            state: stopped
+            enabled: false
+            
+        - name: Ensure nginx is uninstalled
+          ansible.builtin.package:
+            name: nginx
+            state: absent
+

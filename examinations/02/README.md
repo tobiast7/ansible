@@ -112,10 +112,12 @@ incompatibilities.
 
 What happens if you run `ansible-inventory --list` in the directory you created above?
 
+skriver ut i json vilka maskiner som finns och hur dom är grupperade och vilka inställningar som ansible använder för att ansluta.
 ## QUESTION B
 
 What happens if you run `ansible-inventory --graph` in the directory you created above?
 
+det visar strukturen i inventory, vilka hosts som finns och grupper som dom tillhör.
 ## QUESTION C
 
 In the `hosts` file, add a new host with the same hostname as the machine you're running
@@ -131,6 +133,8 @@ Now run:
 Study the output of this command.
 
 What does the `ansible_connection=local` part mean?
+
+Det betyder att ansible kör kommandon lokalt istället för att köra med ssh som på dom andra hosts.
 
 ## BONUS QUESTION
 
@@ -153,3 +157,4 @@ In your Ansible working directory where the `ansible.cfg' is, run
 You should get a pager displaying all available configuration values. How does it differ
 from when you run the same command in your usual home directory?
 
+I home skrivs mer ut eftersom alla standard värden visas, medan i min playbook katalog så visas färre radet eftersom det är mina egna inställningar som används.

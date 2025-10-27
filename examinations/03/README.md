@@ -121,9 +121,14 @@ Run the exact same playbook again and study the output. What is the difference?
 
 What does the `ansible.builtin.debug` module actually do?
 
+Den skriver ut statements under execution.
+
 ## QUESTION B
 
 What is the variable 'ansible_facts' and where does it come from?
+
+ansible.facts är en directory som automatiskt samlar in information i gather facts från targeted hosts.
+som samlas in av ansibles setup module.
 
 ## QUESTION C
 
@@ -133,6 +138,8 @@ next time we run the playbook. This is a concept called _idempotency_.
 How do we now remove the software we installed through the playbook above? Make the
 playbook remove the exact same software we previously installed. Call the created
 playbook `03-uninstall-software.yml`.
+
+Det enda man behöver ändra är state: till "absent" istället för present för att avinstallera.
 
 ## BONUS QUESTION
 

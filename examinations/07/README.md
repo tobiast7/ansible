@@ -28,6 +28,8 @@ is run.
 When you have run the playbook above successfully, how can you verify that the `mariadb`
 service is started and is running?
 
+Du kan kontrollera ifall mariadb är active genom att köra ssh in i db och köra kommandot systemctl status mariadb
+
 # BONUS QUESTION
 
 How many different ways can use come up with to verify that the `mariadb` service is running?

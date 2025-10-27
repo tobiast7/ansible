@@ -1,0 +1,24 @@
+---
+    - name: Add users to webservers with correct groups
+      hosts: web
+      become: true
+
+      vars:
+        users:
+        - name: alovelace
+          groups: ['wheel', 'audio', 'video']
+        - name: aturing
+          groups: ['tape']
+        - name: edijkstra
+          groups: ['tcpdump']
+        - name: ghopper
+          groups: ['wheel', 'audio']
+
+      tasks:
+        - name: Ensure users exist and are in correct groups
+          ansible.builtin.user:
+            name: "{{ item.name }}"
+            groups: "{{ item.groups | join(',') }}"
+            append: yes
+            state: present
+          loop: "{{ users }}"

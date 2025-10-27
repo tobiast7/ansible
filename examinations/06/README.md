@@ -167,6 +167,8 @@ There are several ways to accomplish this, and there is no _best_ way to do this
 
 Is this a good way to handle these types of conditionals? What do you think?
 
+Det fungerar bra i små playbooks när man inte har så många outputs men när playbooken blir större så blir det rörigare att hantera. men det är ett bra sätt att kunna kontrollera playbooken vid tex restart nginx.
+
 # BONUS QUESTION
 
 Imagine you had a playbook with hundreds of tasks to be done on several hosts, and each one of these tasks
@@ -177,3 +179,5 @@ would you like the flow to work?
 
 Describe in simple terms what your preferred task flow would look like, not necessarily implemented in
 Ansible, but in general terms.
+
+kontrollera vilka ändringar som behöver göras, sen grupperar man liknande uppgifter tillsammans så dom kan utföras i ett steg. sen görs omstarter bara en gång efter alla ändringar för att undvika onödiga driftstopp.
