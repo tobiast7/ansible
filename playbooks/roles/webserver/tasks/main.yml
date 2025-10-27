@@ -13,6 +13,7 @@
         group: root
         mode: '0644'
       register: resultconf
+      notify: Reload nginx
 
     - name: deploy nginx Config
       ansible.builtin.template:
@@ -21,6 +22,7 @@
         owner: root
         group: root
         mode: '0644'
+      notify: Reload nginx
 
     - name: create web root
       ansible.builtin.file:
@@ -37,14 +39,7 @@
         owner: root
         group: root
         mode: '0644'
-      register: resultindex
-
-    - name: Ensure nginx is restarted
-      ansible.builtin.service:
-        name: nginx
-        state: restarted
-      when: resultconf.changed or resultindex.changed
-
+        
     - name: Add web users
       vars:
         web_users:
