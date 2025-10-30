@@ -3,6 +3,17 @@
       hosts: web
       become: true
       tasks:
+
+        - name: Ensure nginx is installed
+          ansible.builtin.package:
+            name: nginx
+            state: latest
+
+        - name: Ensure nginx is started at boot
+          ansible.builtin.service:
+            name: nginx
+            enabled: true
+            
         - name: Copy HTTPS configuration to nginx
           ansible.builtin.copy:
             src: files/https.conf
