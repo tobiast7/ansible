@@ -11,6 +11,36 @@
         state: started
         enabled: true
 
+    - name: Ensure PyMySQL is installed
+      ansible.builtin.package:
+        name: python3-PyMySQL
+        state: present
+        
+    - name: Create database webappdb
+      community.mysql.mysql_db:
+        name: webappdb
+        state: present
+        login_unix_socket: /var/lib/mysql/mysql.sock
+        
+    - name: Ensure PyMySQL is installed
+      ansible.builtin.package:
+        name: python3-PyMySQL
+        state: present
+
+    - name: Create database webappdb
+      community.mysql.mysql_db:
+        name: webappdb
+        state: present
+        login_unix_socket: /var/lib/mysql/mysql.sock
+
+    - name: Create user webappuser
+      community.mysql.mysql_user:
+        name: webappuser
+        password: secretpassword
+        priv: webappdb.*:ALL
+        state: present
+        login_unix_socket: /var/lib/mysql/mysql.sock
+
     - name: Copy all .md files to deploys home directory
       ansible.builtin.copy:
         src: "{{ item }}"
