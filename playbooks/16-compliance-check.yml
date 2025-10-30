@@ -1,0 +1,88 @@
+---
+    - name: security complaince check
+      hosts: all
+      become: true
+      tasks:
+        - name: Gather system facts
+          ansible.builtin.setup:
+
+        - name: Gather package facts
+          ansible.builtin.package_facts:
+
+        - name: check telnet server is not installed
+          ansible.builtin.assert:
+            that:
+              - "'telnet-server' not in ansible_facts.packages"
+            fail_msg: "telnet-server is installed"
+            success_msg: "telnet-server is not installed"
+        
+        - name: check so rsh-server is not installed
+          ansible.builtin.assert:
+            that:
+              - "'rsh-server' not in ansible_facts.packages"
+            fail_msg: "rsh-server is installed"
+            success_msg: "rsh-server is not installed"
+
+        - name: check xinetd
+          ansible.builtin.assert:
+            that:
+              - "'xinetd' not in ansible_facts.packages"
+            fail_msg: "xinetd is installed"
+            success_msg: "xinetd is not installed"
+          
+
+        - name: service facts
+          ansible.builtin.service_facts:
+
+        - name: check if firewalld is running
+          ansible.builtin.assert:
+            that:
+              - "'firewalld.service' is in ansible_facts.services"
+              - "ansible_facts.services['firewalld.service'].state == 'running'"
+            fail_msg: "firewalld is not acitve"
+            success_msg: "firewalld is active"
+        
+        - name: check chronyd is installed
+          ansible.builtin.assert:
+            that:
+              - "'chrony' in ansible_facts.packages"
+            fail_msg: "chrony package not installed"
+            success_msg: "chorny package is installed"
+
+        - name: check so chronyd is running
+          ansible.builtin.assert:
+            that:
+              - "'chronyd.service' in ansible_facts.services"
+              - " ansible_facts.services['chronyd.service'].state == 'running'"
+            fail_msg: "chronyd is not running"
+            success_msg: "chronyd is running"
+        
+        - name: check if auditd is installed
+          ansible.builtin.assert:
+            that:
+              - "'audit' in ansible_facts.packages"
+            fail_msg: "audit is not installed"
+            success_msg: "audit is installed"
+        
+        - name: check if auditd is running
+          ansible.builtin.assert:
+            that:
+              - "'auditd.service' in ansible_facts.services"
+              - "ansible_facts.services['auditd.service'].state == 'running'"
+            fail_msg: "auditd is not running"
+            success_msg: "auditd is running"
+        
+        - name: check ypbind
+          ansible.builtin.assert:
+            that:
+              - "'ypbind' not in ansible_facts.packages"
+            fail_msg: "ypbind is installed"
+            success_msg: "ypbind is not installed"
+        
+        - name: check yp-tools
+          ansible.builtin.assert:
+            that:
+             -  "'yp-tools' not in ansible_facts.packages"
+            fail_msg: "yp-tools is installed"
+            success_msg: "yp-tools is not installed"
+        
