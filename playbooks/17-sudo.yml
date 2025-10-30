@@ -1,0 +1,17 @@
+---
+    - name: sudolock
+      become: true
+      hosts: all
+      tasks:
+
+        - name: 
+          ansible.builtin.user:
+            name: deploy
+            password: "$6$KEaYw4en.x7vmRQv$1Z6v8EPDPrH8DgfAqpqJx4W4tGpBwv/uuDBC3qqVhJXEM0fD1c3HNY8PKG2qKtYmvXEAh13p5AuGqaxDFyE9m."
+
+        - name: require password
+          ansible.builtin.lineinfile:
+            path: /etc/sudoers.d/deploy
+            line: 'deploy ALL=(ALL) ALL'
+            create: yes
+            validate: 'visudo -cf %s'
